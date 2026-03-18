@@ -362,28 +362,28 @@ if __name__ == "__main__":
     
     # Create plots
     fig1 = analyzer.plot_energy_evolution()
-    plt.savefig('/tmp/energy_evolution.png', dpi=150, bbox_inches='tight')
+    plt.savefig('energy_evolution.png', dpi=150, bbox_inches='tight')
     print("✓ Saved: energy_evolution.png")
     
     fig2 = analyzer.plot_momentum_evolution()
-    plt.savefig('/tmp/momentum_evolution.png', dpi=150, bbox_inches='tight')
+    plt.savefig('momentum_evolution.png', dpi=150, bbox_inches='tight')
     print("✓ Saved: momentum_evolution.png")
     
     fig3 = analyzer.plot_collision_rate()
-    plt.savefig('/tmp/collision_rate.png', dpi=150, bbox_inches='tight')
+    plt.savefig('collision_rate.png', dpi=150, bbox_inches='tight')
     print("✓ Saved: collision_rate.png")
     
     fig4 = analyzer.plot_velocity_distribution()
-    plt.savefig('/tmp/velocity_distribution.png', dpi=150, bbox_inches='tight')
+    plt.savefig('velocity_distribution.png', dpi=150, bbox_inches='tight')
     print("✓ Saved: velocity_distribution.png")
     
     fig5 = analyzer.plot_position_distribution_3d()
-    plt.savefig('/tmp/position_3d.png', dpi=150, bbox_inches='tight')
+    plt.savefig('position_3d.png', dpi=150, bbox_inches='tight')
     print("✓ Saved: position_3d.png")
     
     # Visualizer
     fig6 = SimulationVisualizer.plot_single_frame(sim)
-    plt.savefig('/tmp/final_state_3d.png', dpi=150, bbox_inches='tight')
+    plt.savefig('final_state_3d.png', dpi=150, bbox_inches='tight')
     print("✓ Saved: final_state_3d.png")
     
     print("\nAll plots generated successfully!")

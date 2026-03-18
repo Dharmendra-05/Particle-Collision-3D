@@ -512,4 +512,3 @@ Computational Physics Co-Pilot, Anthropic
 ---
 
 **Ready to simulate? Start with the Quick Start section above!** 🎯
-

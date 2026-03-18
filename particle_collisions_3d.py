@@ -10,6 +10,8 @@ Key optimizations:
 - Impulse-based collision response (momentum conserving)
 - Energy tracking for validation
 
+FIXED: Boundary conditions now use scalar radius instead of array
+
 Author: Computational Physics Co-Pilot
 """
 
@@ -317,26 +319,27 @@ class ParticleCollisionSimulator:
     def _apply_boundary_conditions(self):
         """Reflect particles off domain boundaries."""
         d_min, d_max = self.domain_bounds
+        radius = self.config.particle_radius  # Use scalar radius (FIXED)
         
         # X boundaries
-        out_of_bounds_x_min = self.positions[:, 0] < d_min + self.radii
-        out_of_bounds_x_max = self.positions[:, 0] > d_max - self.radii
-        self.positions[out_of_bounds_x_min, 0] = d_min + self.radii
-        self.positions[out_of_bounds_x_max, 0] = d_max - self.radii
+        out_of_bounds_x_min = self.positions[:, 0] < d_min + radius
+        out_of_bounds_x_max = self.positions[:, 0] > d_max - radius
+        self.positions[out_of_bounds_x_min, 0] = d_min + radius
+        self.positions[out_of_bounds_x_max, 0] = d_max - radius
         self.velocities[out_of_bounds_x_min, 0] = np.abs(self.velocities[out_of_bounds_x_min, 0])
         self.velocities[out_of_bounds_x_max, 0] = -np.abs(self.velocities[out_of_bounds_x_max, 0])
         
         # Y boundaries
-        out_of_bounds_y_min = self.positions[:, 1] < d_min + self.radii
-        out_of_bounds_y_max = self.positions[:, 1] > d_max - self.radii
-        self.positions[out_of_bounds_y_min, 1] = d_min + self.radii
-        self.positions[out_of_bounds_y_max, 1] = d_max - self.radii
+        out_of_bounds_y_min = self.positions[:, 1] < d_min + radius
+        out_of_bounds_y_max = self.positions[:, 1] > d_max - radius
+        self.positions[out_of_bounds_y_min, 1] = d_min + radius
+        self.positions[out_of_bounds_y_max, 1] = d_max - radius
         self.velocities[out_of_bounds_y_min, 1] = np.abs(self.velocities[out_of_bounds_y_min, 1])
         self.velocities[out_of_bounds_y_max, 1] = -np.abs(self.velocities[out_of_bounds_y_max, 1])
         
         # Z boundary (floor at z = d_min)
-        out_of_bounds_z = self.positions[:, 2] < d_min + self.radii
-        self.positions[out_of_bounds_z, 2] = d_min + self.radii
+        out_of_bounds_z = self.positions[:, 2] < d_min + radius
+        self.positions[out_of_bounds_z, 2] = d_min + radius
         self.velocities[out_of_bounds_z, 2] = np.abs(self.velocities[out_of_bounds_z, 2]) * self.config.coefficient_of_restitution
     
     def _record_statistics(self, collision_count: int):
