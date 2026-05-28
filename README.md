@@ -4,7 +4,7 @@
 
 A high-performance, publication-ready simulation of elastic particle collisions in 3D space with gravity. Optimized for molecular dynamics, granular flow analysis, and general rigid-body collision studies.
 
----
+----
 
 ## 🎯 Key Features
 
